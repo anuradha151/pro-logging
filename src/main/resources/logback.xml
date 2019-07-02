@@ -9,19 +9,28 @@
         <file>logs/logfile.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <pattern>"%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"</pattern>
         </encoder>
     </appender>
     <appender name="APP_LOG_FILE" class="ch.qos.logback.core.FileAppender">
         <file>logs/app_log.log</file>
         <append>true</append>
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <pattern>"%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"</pattern>
         </encoder>
     </appender>
-    <!-- additivity=false ensures analytics data only goes to the analytics log -->
     <logger name="app_log" level="INFO" additivity="false">
         <appender-ref ref="APP_LOG_FILE"/>
+    </logger>
+    <appender name="CHARGING_LOG_FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/charging_log.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>"%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"</pattern>
+        </encoder>
+    </appender>
+    <logger name="charging_log" level="INFO" additivity="false">
+        <appender-ref ref="CHARGING_LOG_FILE"/>
     </logger>
     <root>
         <appender-ref ref="FILE"/>

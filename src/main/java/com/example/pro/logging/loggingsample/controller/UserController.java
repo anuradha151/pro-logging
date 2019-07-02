@@ -20,6 +20,7 @@ public class UserController {
 
     private static final Logger app_log = LoggerFactory.getLogger("app_log");
     private static final Logger logfile = LoggerFactory.getLogger("logfile");
+    private static final Logger charging = LoggerFactory.getLogger("charging_log");
 
     private final AppUserService appUserService;
     private final CustomValidateException customValidateException;
@@ -35,6 +36,7 @@ public class UserController {
     public ResponseEntity<?> addNewUser(@Valid @RequestBody AppUserDTO appUserDTO, BindingResult bindingResult) {
         logfile.info("HIT - app_user/save | payload : {}", appUserDTO);
         app_log.info("User save analytics");
+        charging.info("Charging logs for user");
         if (bindingResult.hasErrors()) {
             validateError = customValidateException.validationException(bindingResult);
             throw new CustomException(validateError);
