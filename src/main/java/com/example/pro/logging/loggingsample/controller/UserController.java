@@ -5,8 +5,8 @@ import com.example.pro.logging.loggingsample.exception.CustomException;
 import com.example.pro.logging.loggingsample.exception.CustomValidateException;
 import com.example.pro.logging.loggingsample.model.AuthToken;
 import com.example.pro.logging.loggingsample.service.AppUserService;
-import org.slf4j.*;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,8 @@ import javax.validation.Valid;
 @CrossOrigin
 public class UserController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+    private static final Logger app_log = LoggerFactory.getLogger("app_log");
+    private static final Logger logfile = LoggerFactory.getLogger("logfile");
 
     private final AppUserService appUserService;
     private final CustomValidateException customValidateException;
@@ -32,7 +33,8 @@ public class UserController {
 
     @PostMapping("/save")
     public ResponseEntity<?> addNewUser(@Valid @RequestBody AppUserDTO appUserDTO, BindingResult bindingResult) {
-
+        logfile.info("HIT - app_user/save | payload : {}", appUserDTO);
+        app_log.info("User save analytics");
         if (bindingResult.hasErrors()) {
             validateError = customValidateException.validationException(bindingResult);
             throw new CustomException(validateError);
