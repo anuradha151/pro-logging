@@ -8,6 +8,12 @@
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>logs/logfile.log</file>
         <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>logs/archived/app.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <totalSizeCap>20GB</totalSizeCap>
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
         <encoder>
             <pattern>"%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"</pattern>
         </encoder>
@@ -15,6 +21,12 @@
     <appender name="APP_LOG_FILE" class="ch.qos.logback.core.FileAppender">
         <file>logs/app_log.log</file>
         <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>logs/archived/app.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <totalSizeCap>20GB</totalSizeCap>
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
         <encoder>
             <pattern>"%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"</pattern>
         </encoder>
@@ -25,6 +37,12 @@
     <appender name="CHARGING_LOG_FILE" class="ch.qos.logback.core.FileAppender">
         <file>logs/charging_log.log</file>
         <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>logs/archived/app.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <totalSizeCap>20GB</totalSizeCap>
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
         <encoder>
             <pattern>"%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"</pattern>
         </encoder>
@@ -32,7 +50,7 @@
     <logger name="charging_log" level="INFO" additivity="false">
         <appender-ref ref="CHARGING_LOG_FILE"/>
     </logger>
-    <root>
+    <root level="info">
         <appender-ref ref="FILE"/>
         <appender-ref ref="CONSOLE"/>
     </root>
